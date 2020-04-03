@@ -69,6 +69,6 @@ public class DockerProvisioningStrategyTest {
         final DockerSlaveTemplate template = new DockerSlaveTemplate("id");
         template.setRetentionStrategy(new DockerCloudRetentionStrategy(3));
 
-        assertThat(notAllowedStrategy(template), is(true));
+        assertThat(notAllowedStrategy(template), is(false));
     }
 }

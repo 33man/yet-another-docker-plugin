@@ -2,6 +2,7 @@ package com.github.kostyasha.yad;
 
 import com.github.kostyasha.yad.other.cloudorder.AsIsDockerCloudOrder;
 import com.github.kostyasha.yad.other.cloudorder.DockerCloudOrder;
+import com.github.kostyasha.yad.strategy.DockerCloudRetentionStrategy;
 import com.github.kostyasha.yad.strategy.DockerOnceRetentionStrategy;
 import com.google.common.annotations.VisibleForTesting;
 import hudson.Extension;
@@ -128,7 +129,7 @@ public class DockerProvisioningStrategy extends NodeProvisioner.Strategy {
             LOG.debug("Skipping DockerProvisioningStrategy because: strategy is null for {}", template);
         }
 
-        if (retentionStrategy instanceof DockerOnceRetentionStrategy) {
+        if (retentionStrategy instanceof DockerOnceRetentionStrategy || retentionStrategy instanceof DockerCloudRetentionStrategy) {
             if (template.getNumExecutors() == 1) {
                 LOG.debug("Applying faster provisioning for single executor template {}", template);
                 return false;
